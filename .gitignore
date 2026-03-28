@@ -3,3 +3,6 @@ nginx-cache
 letsencrypt
 dist
 package-lock.json
+.wrangler
+.env
+.DS_Store

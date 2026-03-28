@@ -7,9 +7,15 @@
     "dev": "npx nodemon src/index.ts",
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "test": "node dist/test.js"
+    "test": "node dist/test.js",
+    "deploy": "wrangler deploy",
+    "dev:worker": "wrangler dev"
   },
-  "keywords": ["hls", "proxy", "m3u8"],
+  "keywords": [
+    "hls",
+    "proxy",
+    "m3u8"
+  ],
   "author": "rishabnotfound",
   "license": "MIT",
   "description": "The ultimate HLS proxy server. Handles any HLS stream you throw at it.",
@@ -17,10 +23,12 @@
     "axios": "^1.9.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "hono": "^4.12.9",
     "pm2": "^5.4.3",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "wrangler": "^4.78.0"
   }
 }
