@@ -1,0 +1,10 @@
+src/worker.ts(127,88): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(object: { error: string; }, status?: ContentfulStatusCode | undefined, headers?: HeaderRecord | undefined): JSONRespondReturn<{ error: string; }, ContentfulStatusCode>', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'ContentfulStatusCode | undefined'.
+  Overload 2 of 2, '(object: { error: string; }, init?: ResponseOrInit<ContentfulStatusCode> | undefined): JSONRespondReturn<{ error: string; }, ContentfulStatusCode>', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'ResponseOrInit<ContentfulStatusCode> | undefined'.
+src/worker.ts(203,88): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(object: { error: string; }, status?: ContentfulStatusCode | undefined, headers?: HeaderRecord | undefined): JSONRespondReturn<{ error: string; }, ContentfulStatusCode>', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'ContentfulStatusCode | undefined'.
+  Overload 2 of 2, '(object: { error: string; }, init?: ResponseOrInit<ContentfulStatusCode> | undefined): JSONRespondReturn<{ error: string; }, ContentfulStatusCode>', gave the following error.
+    Argument of type 'number' is not assignable to parameter of type 'ResponseOrInit<ContentfulStatusCode> | undefined'.
