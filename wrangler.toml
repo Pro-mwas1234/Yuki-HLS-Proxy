@@ -4,7 +4,7 @@ compatibility_date = "2024-04-03"
 
 [vars]
 ALLOWED_ORIGINS = "*"
-BASE_PATH = "https://yukproxy.shawnmwask1234.workers.dev"
+BASE_PATH = "https://yukiproxy.shawnmwask1234.workers.dev"
 
 [observability]
 enabled = true
