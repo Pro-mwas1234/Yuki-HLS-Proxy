@@ -113,7 +113,8 @@ app.get('/m3u8-proxy.m3u8', async (c) => {
   const headersStr = decodeURIComponent(c.req.query('headers') || '{}');
   const basePath = c.env.BASE_PATH || new URL(c.req.url).origin;
 
-  if (!url) return c.json({ error: 'Invalid URL parameter' }, 400);
+  // ✅ Fixed: Use { status: ... } object format
+  if (!url) return c.json({ error: 'Invalid URL parameter' }, { status: 400 });
 
   let headersJson = {};
   try {
@@ -124,7 +125,9 @@ app.get('/m3u8-proxy.m3u8', async (c) => {
 
   try {
     const response = await fetch(url, { headers: headersJson });
-    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, response.status);
+    
+    // ✅ Fixed: Use { status: ... } with cast for dynamic status
+    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, { status: response.status } as any);
 
     const data = await response.text();
     const lines = data.split('\n');
@@ -187,7 +190,8 @@ app.get('/m3u8-proxy.m3u8', async (c) => {
     });
   } catch (error) {
     console.error("M3U8 error:", error);
-    return c.json({ error: 'Failed to fetch the m3u8 URL' }, 500);
+    // ✅ Fixed: Use { status: ... } object format
+    return c.json({ error: 'Failed to fetch the m3u8 URL' }, { status: 500 });
   }
 });
 
@@ -196,14 +200,17 @@ app.get('/ts-proxy.ts', async (c) => {
   const headersStr = c.req.query('headers');
   const headers = headersStr ? JSON.parse(headersStr) : {};
 
-  if (!url) return c.json({ error: 'URL parameter is required' }, 400);
+  // ✅ Fixed: Use { status: ... } object format
+  if (!url) return c.json({ error: 'URL parameter is required' }, { status: 400 });
 
   try {
     const response = await fetch(url, { headers });
-    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, response.status);
+    
+    // ✅ Fixed: Use { status: ... } with cast for dynamic status
+    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, { status: response.status } as any);
 
     const newHeaders = new Headers(response.headers);
-    newHeaders.set('Access-Control-Allow-Origin', '*'); // Handled by middleware but safe to keep or adjust
+    newHeaders.set('Access-Control-Allow-Origin', '*');
     newHeaders.set('Cache-Control', 'public, max-age=86400, stale-while-revalidate=86400');
 
     return new Response(response.body, {
@@ -212,7 +219,8 @@ app.get('/ts-proxy.ts', async (c) => {
     });
   } catch (error) {
     console.error("TS error:", error);
-    return c.json({ error: 'Proxy error' }, 500);
+    // ✅ Fixed: Use { status: ... } object format
+    return c.json({ error: 'Proxy error' }, { status: 500 });
   }
 });
 
