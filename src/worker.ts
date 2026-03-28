@@ -125,7 +125,7 @@ app.get('/m3u8-proxy.m3u8', async (c) => {
 
   try {
     const response = await fetch(url, { headers: headersJson });
-    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, response.status);
+    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, { status: response.status as any });
 
     const data = await response.text();
     const lines = data.split('\n');
@@ -203,7 +203,7 @@ app.get('/ts-proxy.ts', async (c) => {
 
   try {
     const response = await fetch(url, { headers });
-    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, response.status);
+    if (!response.ok) return c.json({ error: `Upstream returned ${response.status}` }, { status: response.status as any });
 
     const newHeaders = new Headers(response.headers);
     newHeaders.set('Access-Control-Allow-Origin', '*');
